@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'splash_screen.dart';
 import 'login.dart';
 import 'registration_screen.dart';
-import 'home_screen.dart'; // Import HomeScreen
+import 'home_screen.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'api_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginScreen(),
         '/register': (context) => RegistrationScreen(),
-        '/home': (context) => HomeScreen(), // Add HomeScreen route
+        '/home': (context) => HomeScreen(),
+        '/api': (context) => ApiScreen(),
       },
     );
   }
