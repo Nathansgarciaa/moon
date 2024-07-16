@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
 
+  bloc: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

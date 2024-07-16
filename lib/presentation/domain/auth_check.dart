@@ -4,6 +4,8 @@ import 'home_screen.dart';
 import 'login_screen.dart';
 
 class AuthChecker extends StatelessWidget {
+  const AuthChecker({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Get the current user
@@ -15,7 +17,7 @@ class AuthChecker extends StatelessWidget {
       return LoginScreen();
     } else {
       // User is logged in, navigate to HomeScreen
-      return HomeScreen();
+      return const HomeScreen();
     }
   }
 }

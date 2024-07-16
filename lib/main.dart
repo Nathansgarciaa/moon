@@ -1,34 +1,38 @@
-import 'package:flutter/material.dart';
-import 'splash_screen.dart';
-import 'login.dart';
-import 'registration_screen.dart';
-import 'home_screen.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'api_screen.dart';
+import 'package:flutter/material.dart'; // Importing Flutter's material design package
+import 'splash_screen.dart'; // Importing the splash screen
+import 'login.dart'; // Importing the login screen
+import 'registration_screen.dart'; // Importing the registration screen
+import 'home_screen.dart'; // Importing the home screen
+import 'firebase_options.dart'; // Importing Firebase options for configuration
+import 'package:firebase_core/firebase_core.dart'; // Importing Firebase core package
+import 'api_screen.dart'; // Importing the API screen
 
+// Main function to initialize the app
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures that all widgets are initialized before running the app
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: DefaultFirebaseOptions.currentPlatform, // Initializes Firebase with the platform-specific options
   );
-  runApp(MyApp());
+  runApp(const MyApp()); // Runs the MyApp widget
 }
 
+// Root widget of the application
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'My App',
+      title: 'My App', // Title of the app
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blue, // Setting the primary color theme of the app
       ),
-      home: SplashScreen(),
+      home: SplashScreen(), // The initial screen of the app
       routes: {
-        '/login': (context) => LoginScreen(),
-        '/register': (context) => RegistrationScreen(),
-        '/home': (context) => HomeScreen(),
-        '/api': (context) => ApiScreen(),
+        '/login': (context) => LoginScreen(), // Route for the login screen
+        '/register': (context) => RegistrationScreen(), // Route for the registration screen
+        '/home': (context) => const HomeScreen(), // Route for the home screen
+        '/api': (context) => const ApiScreen(), // Route for the API screen
       },
     );
   }

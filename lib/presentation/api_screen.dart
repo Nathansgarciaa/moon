@@ -6,6 +6,8 @@ import 'models/product.dart';
 
 // Stateful widget to manage the API screen state
 class ApiScreen extends StatefulWidget {
+  const ApiScreen({super.key});
+
   @override
   _ApiScreenState createState() => _ApiScreenState();
 }
@@ -19,10 +21,10 @@ class _ApiScreenState extends State<ApiScreen> {
       create: (context) => ProductBloc(Dio())..add(FetchProductsEvent()), // Initialize ProductBloc and fetch products
       child: Scaffold(
         appBar: AppBar(
-          title: Text('API Screen'), // Title for the AppBar
+          title: const Text('API Screen'), // Title for the AppBar
           backgroundColor: Colors.grey[850], // Background color for the AppBar
           leading: IconButton(
-            icon: Icon(Icons.arrow_back), // Back button icon
+            icon: const Icon(Icons.arrow_back), // Back button icon
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/home'); // Navigate back to home screen
             },
@@ -33,7 +35,7 @@ class _ApiScreenState extends State<ApiScreen> {
           builder: (context, state) {
             if (state is ProductLoading) {
               // Show a loading indicator while products are being fetched
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is ProductLoaded) {
               // Display the list of products when they are successfully loaded
               return Padding(
@@ -49,12 +51,12 @@ class _ApiScreenState extends State<ApiScreen> {
                           final product = state.products[index]; // Get the product at the current index
                           return Container(
                             width: 200, // Set the width of each product container
-                            margin: EdgeInsets.symmetric(horizontal: 8.0), // Margin between product containers
-                            padding: EdgeInsets.all(8.0), // Padding inside each product container
+                            margin: const EdgeInsets.symmetric(horizontal: 8.0), // Margin between product containers
+                            padding: const EdgeInsets.all(8.0), // Padding inside each product container
                             decoration: BoxDecoration(
                               color: Colors.white, // Background color for the container
                               borderRadius: BorderRadius.circular(8.0), // Rounded corners
-                              boxShadow: [
+                              boxShadow: const [
                                 BoxShadow(
                                   color: Colors.black12, // Shadow color
                                   blurRadius: 4.0, // Blur radius for the shadow
@@ -67,12 +69,12 @@ class _ApiScreenState extends State<ApiScreen> {
                               children: [
                                 Text(
                                   product['title'], // Display product title
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0, // Font size for the title
                                     fontWeight: FontWeight.bold, // Bold font weight
                                   ),
                                 ),
-                                SizedBox(height: 8.0), // Add space between title and description
+                                const SizedBox(height: 8.0), // Add space between title and description
                                 Text(
                                   product['body'] ?? 'No description available', // Display product description or fallback text
                                 ),
@@ -90,7 +92,7 @@ class _ApiScreenState extends State<ApiScreen> {
               return Center(child: Text('Error: ${state.message}'));
             } else {
               // Default state when there are no products
-              return Center(child: Text('No Products'));
+              return const Center(child: Text('No Products'));
             }
           },
         ),
