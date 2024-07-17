@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart'; // Importing the BLoC package for state management
-import 'package:equatable/equatable.dart'; // Importing Equatable for value equality
-import 'package:firebase_auth/firebase_auth.dart'; // Importing Firebase Authentication
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// Events
+
 
 // Base class for all authentication-related events
 abstract class AuthEvent extends Equatable {
