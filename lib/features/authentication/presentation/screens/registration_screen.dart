@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart'; // Importing Flutter's material design package
 import 'package:firebase_auth/firebase_auth.dart'; // Importing Firebase Authentication package
 import 'package:flutter_bloc/flutter_bloc.dart'; // Importing Flutter BLoC package
-import '../../domain/bloc/auth/authentification_bloc.dart'; // Importing the authentication BLoC
+import '../controllers/authentication_bloc.dart'; // Importing the authentication BLoC
 
 // RegistrationScreen widget is stateless because it doesn't maintain any state
 class RegistrationScreen extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
-import '../../domain/bloc/api/api_bloc.dart';
+import '../controllers/product_bloc.dart';
 import '../../data/models/product.dart';
 
 // Stateful widget to manage the API screen state

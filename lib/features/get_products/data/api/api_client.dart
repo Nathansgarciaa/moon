@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 
-import '/lib/data/models/product.dart';
+import '../models/product.dart';
 
 part 'api_client.g.dart'; // Ensure this matches the generated file name
 

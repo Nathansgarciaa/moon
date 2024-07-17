@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'home_screen.dart';
-import '../../domain/bloc/auth/authentification_bloc.dart';
+import '../controllers/authentification_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // LoginScreen widget is stateless because it doesn't maintain any state
