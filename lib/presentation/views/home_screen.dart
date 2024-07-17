@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart'; // Importing Flutter's material design package
-import 'package:firebase_auth/firebase_auth.dart'; // Importing Firebase Authentication package
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 // HomeScreen widget is stateless because it doesn't maintain any state
 class HomeScreen extends StatelessWidget {

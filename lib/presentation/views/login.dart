@@ -1,23 +1,23 @@
-import 'package:flutter/material.dart'; // Importing Flutter's material design package
-import 'package:firebase_auth/firebase_auth.dart'; // Importing Firebase Authentication package
-import 'package:flutter_bloc/flutter_bloc.dart'; // Importing Flutter BLoC package
-import 'authentification_bloc.dart'; // Importing the authentication BLoC
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'home_screen.dart';
+import '../../domain/bloc/auth/authentification_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-// RegistrationScreen widget is stateless because it doesn't maintain any state
-class RegistrationScreen extends StatelessWidget {
-  // Controllers to handle text input for name, email, and password fields
-  final TextEditingController nameController = TextEditingController();
+// LoginScreen widget is stateless because it doesn't maintain any state
+class LoginScreen extends StatelessWidget {
+  // Controllers to handle text input for email and password fields
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final Color customDarkerGrey = const Color(0xFF191919);
 
-  RegistrationScreen({super.key});
+  LoginScreen({super.key}); // Custom color for background
 
-  // Function to handle registration logic
-  Future<void> _register(BuildContext context) async {
-    print("Register button pressed"); // Debug print
-    // Adding a registration event to the BLoC with the provided email and password
+  // Function to handle login logic
+  Future<void> _login(BuildContext context) async {
+    // Adding a login event to the BLoC with the provided email and password
     BlocProvider.of<AuthBloc>(context).add(
-      RegisterEvent(
+      LoginEvent(
         emailController.text,
         passwordController.text,
       ),
@@ -26,18 +26,24 @@ class RegistrationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width; // Get screen width for responsive design
     return Scaffold(
-      backgroundColor: Colors.grey[900], // Darker grey background for the entire screen
+      backgroundColor: customDarkerGrey, // Set custom background color
       body: BlocProvider(
         create: (context) => AuthBloc(FirebaseAuth.instance), // Provide the AuthBloc to the widget tree
         child: BlocListener<AuthBloc, AuthState>(
           listener: (context, state) {
             // Listen to state changes and handle navigation and error messages
             if (state is AuthAuthenticated) {
-              Navigator.pushReplacementNamed(context, '/home'); // Navigate to HomeScreen if authenticated
+              // Navigate to home screen if authenticated
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
             } else if (state is AuthError) {
+              // Show error message if authentication fails
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)), // Show error message if registration fails
+                SnackBar(content: Text(state.message)),
               );
             }
           },
@@ -55,40 +61,40 @@ class RegistrationScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: 50), // Space at the top
                       Image.asset(
-                        'assets/login.jpeg', // Main image for the registration screen
-                        width: double.infinity, // Set image width to fill the parent
+                        'assets/login.jpeg', // Main image for the login screen
                         height: 200, // Set image height
+                        width: screenWidth, // Set image width to screen width
                         fit: BoxFit.cover, // Cover the entire width with the image
                       ),
                       const SizedBox(height: 20), // Space between image and buttons
                       Row(
                         children: [
-                          // Google registration button
+                          // Google login button
                           Expanded(
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                // Handle Google registration
+                                // Handle Google login
                               },
                               icon: Image.asset('assets/google_logo.jpg', height: 24), // Google logo
-                              label: const Text('Register'), // Button label
+                              label: const Text('Log in'), // Button label
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey[850], // Dark grey button color
-                                foregroundColor: Colors.white, // Text color
+                                backgroundColor: Colors.grey[850], // Button background color
+                                foregroundColor: Colors.white, // Button text color
                               ),
                             ),
                           ),
                           const SizedBox(width: 10), // Space between Google and Facebook buttons
-                          // Facebook registration button
+                          // Facebook login button
                           Expanded(
                             child: ElevatedButton.icon(
                               onPressed: () {
-                                // Handle Facebook registration
+                                // Handle Facebook login
                               },
                               icon: Image.asset('assets/facebook_logo.png', height: 24), // Facebook logo
-                              label: const Text('Register'), // Button label
+                              label: const Text('Log in'), // Button label
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.grey[850], // Dark grey button color
-                                foregroundColor: Colors.white, // Text color
+                                backgroundColor: Colors.grey[850], // Button background color
+                                foregroundColor: Colors.white, // Button text color
                               ),
                             ),
                           ),
@@ -100,27 +106,12 @@ class RegistrationScreen extends StatelessWidget {
                         textAlign: TextAlign.center, // Center-align the text
                         style: TextStyle(color: Colors.white), // Text color
                       ),
-                      const SizedBox(height: 20), // Space between text and name field
-                      // Name input field
-                      TextField(
-                        controller: nameController, // Controller for name input
-                        decoration: InputDecoration(
-                          labelText: 'Full Name', // Label for the name field
-                          labelStyle: const TextStyle(color: Colors.grey), // Label text color
-                          filled: true, // Fill the background
-                          fillColor: Colors.white, // Background color
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8.0), // Rounded corners
-                          ),
-                        ),
-                        style: const TextStyle(color: Colors.grey), // Input text color
-                      ),
-                      const SizedBox(height: 20), // Space between name and email fields
+                      const SizedBox(height: 20), // Space between text and email field
                       // Email input field
                       TextField(
                         controller: emailController, // Controller for email input
                         decoration: InputDecoration(
-                          labelText: 'E-mail', // Label for the email field
+                          labelText: 'Email', // Label for the email field
                           labelStyle: const TextStyle(color: Colors.grey), // Label text color
                           filled: true, // Fill the background
                           fillColor: Colors.white, // Background color
@@ -152,9 +143,9 @@ class RegistrationScreen extends StatelessWidget {
                         children: [
                           // "Remember me" checkbox
                           Checkbox(
-                            value: true, // This should be a state variable
+                            value: true, // Initial value of the checkbox
                             onChanged: (bool? newValue) {
-                              // Handle checkbox state change
+                              // Handle checkbox change
                             },
                           ),
                           const Text(
@@ -174,30 +165,29 @@ class RegistrationScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 20), // Space between "Remember me" row and register button
-                      // Register button
+                      const SizedBox(height: 20), // Space between "Remember me" row and login button
+                      // Login button
                       ElevatedButton(
                         onPressed: () {
-                          print("Register button clicked"); // Debug print
-                          _register(context); // Call register function
+                          _login(context); // Call login function
                         }, // Button label
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[850], // Button background color
                           foregroundColor: Colors.white, // Button text color
                           padding: const EdgeInsets.symmetric(vertical: 16), // Padding inside the button
                         ),
-                        child: const Text('Register'),
+                        child: const Text('Log in'),
                       ),
-                      const SizedBox(height: 20), // Space between register button and "Sign in" button
+                      const SizedBox(height: 20), // Space between login button and "Sign up" button
                       Center(
-                        // "Sign in" button
+                        // "Sign up" button
                         child: TextButton(
                           onPressed: () {
-                            // Navigate to login screen
-                            Navigator.pushNamed(context, '/login');
+                            // Navigate to registration screen
+                            Navigator.pushNamed(context, '/register');
                           },
                           child: const Text(
-                            'Already have an account? Sign in', // Button label
+                            'Don\'t have an account? Sign up', // Button label
                             style: TextStyle(color: Colors.white), // Text color
                           ),
                         ),

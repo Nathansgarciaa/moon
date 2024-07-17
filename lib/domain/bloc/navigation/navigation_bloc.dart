@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart'; // Importing the BLoC package for state management
-import 'package:equatable/equatable.dart'; // Importing Equatable for value equality
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 
 // Navigation Events
 

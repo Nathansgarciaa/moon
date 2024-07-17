@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart'; // Importing Flutter's material design package
-import 'splash_screen.dart'; // Importing the splash screen
-import 'login.dart'; // Importing the login screen
-import 'registration_screen.dart'; // Importing the registration screen
-import 'home_screen.dart'; // Importing the home screen
-import 'firebase_options.dart'; // Importing Firebase options for configuration
+import 'presentation/views/splash_screen.dart'; // Importing the splash screen
+import 'presentation/views/login.dart'; // Importing the login screen
+import 'presentation/views/registration_screen.dart'; // Importing the registration screen
+import 'presentation/views/home_screen.dart'; // Importing the home screen
+import 'data/configs/firebase_options.dart'; // Importing Firebase options for configuration
 import 'package:firebase_core/firebase_core.dart'; // Importing Firebase core package
-import 'api_screen.dart'; // Importing the API screen
+import 'presentation/views/api_screen.dart'; // Importing the API screen
 
 // Main function to initialize the app
 void main() async {
