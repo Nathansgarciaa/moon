@@ -1,24 +1,24 @@
-import 'package:flutter/material.dart'; // Importing Flutter's material design package
-import 'presentation/views/splash_screen.dart'; // Importing the splash screen
-import 'presentation/views/login.dart'; // Importing the login screen
-import 'presentation/views/registration_screen.dart'; // Importing the registration screen
-import 'presentation/views/home_screen.dart'; // Importing the home screen
-import 'data/configs/firebase_options.dart'; // Importing Firebase options for configuration
-import 'package:firebase_core/firebase_core.dart'; // Importing Firebase core package
-import 'presentation/views/api_screen.dart'; // Importing the API screen
-
+import 'package:flutter/material.dart';
+import 'features/authentication/presentation/screens/splash_screen.dart';
+import 'features/authentication/presentation/screens/login.dart';
+import 'features/authentication/presentation/screens/registration_screen.dart';
+import 'features/authentication/presentation/screens/home_screen.dart';
+import 'core/configs/firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import '/features/get_products/presentation/screens/api_screen.dart';
 // Main function to initialize the app
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); // Ensures that all widgets are initialized before running the app
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform, // Initializes Firebase with the platform-specific options
   );
-  runApp(const MyApp()); // Runs the MyApp widget
+
+  runApp(MyApp()); // Runs the MyApp widget
 }
 
 // Root widget of the application
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login': (context) => LoginScreen(), // Route for the login screen
         '/register': (context) => RegistrationScreen(), // Route for the registration screen
-        '/home': (context) => const HomeScreen(), // Route for the home screen
+        '/home': (context) => HomeScreen(), // Route for the home screen
         '/api': (context) => const ApiScreen(), // Route for the API screen
       },
     );
