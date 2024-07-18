@@ -14,7 +14,7 @@ class RegistrationScreen extends StatelessWidget {
 
   // Function to handle registration logic
   Future<void> _register(BuildContext context) async {
-    print("Register button pressed"); // Debug print
+
     // Adding a registration event to the BLoC with the provided email and password
     BlocProvider.of<AuthBloc>(context).add(
       RegisterEvent(
@@ -178,7 +178,7 @@ class RegistrationScreen extends StatelessWidget {
                       // Register button
                       ElevatedButton(
                         onPressed: () {
-                          print("Register button clicked"); // Debug print
+
                           _register(context); // Call register function
                         }, // Button label
                         style: ElevatedButton.styleFrom(

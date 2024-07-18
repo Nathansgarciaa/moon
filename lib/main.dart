@@ -13,12 +13,12 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform, // Initializes Firebase with the platform-specific options
   );
 
-  runApp(MyApp()); // Runs the MyApp widget
+  runApp(const MyApp()); // Runs the MyApp widget
 }
 
 // Root widget of the application
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +27,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue, // Setting the primary color theme of the app
       ),
-      home: SplashScreen(), // The initial screen of the app
+      home: const SplashScreen(), // The initial screen of the app
       routes: {
         '/login': (context) => LoginScreen(), // Route for the login screen
-        '/register': (context) => RegistrationScreen(), // Route for the registration screen
-        '/home': (context) => HomeScreen(), // Route for the home screen
+        '/register': (context) =>  RegistrationScreen(), // Route for the registration screen
+        '/home': (context) => const HomeScreen(), // Route for the home screen
         '/api': (context) => const ApiScreen(), // Route for the API screen
       },
     );
