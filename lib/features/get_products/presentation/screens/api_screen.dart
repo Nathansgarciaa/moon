@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import '../controllers/product_bloc.dart';
-import '../../data/models/product.dart';
+
 
 // Stateful widget to manage the API screen state
 class ApiScreen extends StatefulWidget {
   const ApiScreen({super.key});
 
   @override
-  _ApiScreenState createState() => _ApiScreenState();
+  ApiScreenState createState() => ApiScreenState();
 }
 
 // State class for ApiScreen
-class _ApiScreenState extends State<ApiScreen> {
+class ApiScreenState extends State<ApiScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

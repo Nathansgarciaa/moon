@@ -1,54 +1,88 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-// HomeScreen widget is stateless because it doesn't maintain any state
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  HomeScreenState createState() => HomeScreenState();
+}
+
+class HomeScreenState extends State<HomeScreen> {
+  double _dioButtonOpacity = 1.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Scaffold provides a structure for the basic material design visual layout
       appBar: AppBar(
-        title: const Text('Home Screen'), // Title of the AppBar
-        backgroundColor: Colors.grey[850], // Background color of the AppBar
+        title: const Text('Home Screen'),
+        backgroundColor: Colors.grey[850],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0), // Padding around the body content
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Center elements vertically
-          crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch elements to fill horizontal space
-          children: [
-            const Spacer(), // Spacer pushes the following widgets to the top
-            ElevatedButton(
-              onPressed: () {
-                // Handle Dio button tap
-                Navigator.pushReplacementNamed(context, '/api'); // Navigate to the API screen
-              }, // Text on the button
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[850], // Button background color
-                foregroundColor: Colors.white, // Button text color
-                padding: const EdgeInsets.symmetric(vertical: 16), // Padding inside the button
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.black, Colors.grey[900]!],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Spacer(),
+              Center(
+                child: Icon(
+                  Icons.nightlight_round,
+                  size: 100,
+                  color: Colors.yellow[700],
+                ),
               ),
-              child: const Text('Dio'),
-            ),
-            const SizedBox(height: 20), // Space between the two buttons
-            const Spacer(), // Spacer pushes the logout button to the bottom
-            ElevatedButton(
-              onPressed: () async {
-                await FirebaseAuth.instance.signOut(); // Sign out the user from Firebase
-                Navigator.pushReplacementNamed(context, '/login'); // Navigate to the login screen
-              }, // Text on the logout button
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red, // Button background color
-                foregroundColor: Colors.white, // Button text color
-                padding: const EdgeInsets.symmetric(vertical: 8), // Padding inside the button
+              const SizedBox(height: 40),
+              AnimatedOpacity(
+                opacity: _dioButtonOpacity,
+                duration: Duration(seconds: 1),
+                child: ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _dioButtonOpacity = _dioButtonOpacity == 1.0 ? 0.5 : 1.0;
+                    });
+                    Navigator.pushReplacementNamed(context, '/api');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[850],
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                  ),
+                  child: const Text('Dio'),
+                ),
               ),
-              child: const Text('Logout'),
-            ),
-          ],
+              const SizedBox(height: 20),
+              const Spacer(),
+              ElevatedButton(
+                onPressed: () async {
+                  await signOut();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                ),
+                child: const Text('Logout'),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Future<void> signOut() async {
+    await FirebaseAuth.instance.signOut();
+    if (mounted) {
+      Navigator.pushReplacementNamed(context, '/login');
+    }
   }
 }
